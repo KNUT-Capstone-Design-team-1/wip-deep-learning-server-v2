@@ -1,0 +1,19 @@
+version: '3.8' 
+
+services: 
+  wip-dl:
+    image: 2mukee/wip-dl
+    expose:
+     - 5000
+    networks:
+     - wip-router
+    environment:
+     - TZ=Aisa/Seoul
+    deploy: 
+      mode: replicated 
+      replicas: 10 
+      update_config: 
+        parallelism: 10 
+        delay: 10s 
+        order: start-first 
+        failure_action: rollback 

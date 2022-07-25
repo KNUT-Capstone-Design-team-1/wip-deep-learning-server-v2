@@ -43,7 +43,7 @@ class ResNet152(torch.nn.Module):
 
 class ResNet18(torch.nn.Module):
     def __init__(self, class_num):
-        super(Shape_ResNet18, self).__init__()
+        super(ResNet18, self).__init__()
         self.resnet18 = torchvision.models.resnet18(pretrained=False)
         self.fc = torch.nn.Linear(1000, class_num)
 

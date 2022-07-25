@@ -1,6 +1,6 @@
-from pill_shape_model.models import ResNet18
 import torchvision.transforms as transforms
 import torch
+from efficientnet_pytorch import EfficientNet
 
 import numpy as np
 from PIL import Image
@@ -19,9 +19,10 @@ def transform_image(image_data):
 
 def detect_pill_shape(img_data):
     # 신경망 초기화
-    model = ResNet18(2)
+    model_name = 'efficientnet-b7'
 
     # 학습된 모델 불러오기
+    model = EfficientNet.from_pretrained(model_name, num_classes=2)
     model.load_state_dict(torch.load('./deeplearning_server/weights/pill_shape_fine_tuned.pt', map_location='cpu'))
     model.eval()
 

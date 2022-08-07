@@ -5,14 +5,11 @@ import cv2, math
 def make_json(pill_shape, pill_text, pill_line=False):
     # json 기본 구조 설정
     drugData = {
-        "drug_name" : "",
-        "drug_type" : "",
-        "drug_shape" : "",
-        "drug_color" : "",
-        "drug_line" : "없음"
+        "PRINT" : "",
+        "DRUG_SHAPE" : "",
     }
-    drugData['drug_shape'] = pill_shape # 알약 모양
-    drugData["drug_name"] = pill_text # 알약 문자
+    drugData["PRINT"] = pill_shape # 알약 모양
+    drugData["DRUG_SHAPE"] = pill_text # 알약 문자
     # drugData["drug_line"] = pill_line
     
     json_data = json.dumps(drugData, ensure_ascii=False, indent='\t')

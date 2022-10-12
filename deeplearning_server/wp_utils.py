@@ -1,22 +1,32 @@
 import json
-import cv2, math
+import cv2
+import math
 
 # json 생성
+
+
 def make_json(pill_shape, pill_text, pill_line=False):
     # json 기본 구조 설정
     drugData = {
-        "PRINT" : "",
-        "DRUG_SHAPE" : "",
+        "data": [{
+            "print": "",
+            "chartin": "",
+            "drug_shape": "",
+            "color_class": "",
+            "line_front": "",
+        }]
     }
-    drugData["PRINT"] = pill_shape # 알약 모양
-    drugData["DRUG_SHAPE"] = pill_text # 알약 문자
+    drugData["data"][0]["print"] = pill_shape  # 알약 모양
+    drugData["data"][0]["drug_shape"] = pill_text  # 알약 문자
     # drugData["drug_line"] = pill_line
-    
+
     json_data = json.dumps(drugData, ensure_ascii=False, indent='\t')
-    
+
     return json_data
 
 # crop한 text영역 이미지 회전 (croped img, polys=영역 좌표, 중심좌표)
+
+
 def rotate_img(img, polys, center):
     center = tuple(map(int, center))
     # 좌상단(polys[0]), 좌하단(polys[3])
@@ -39,7 +49,7 @@ def rotate_img(img, polys, center):
     # atan2로 구한 각도에 맞추어 회전
     img_rot = cv2.warpAffine(img, M, (width, height))
     # text 영역 중심을 기준으로 이미지 crop
-    img_crop = cv2.getRectSubPix(img_rot, (imgW,imgH), center)
+    img_crop = cv2.getRectSubPix(img_rot, (imgW, imgH), center)
     if imgH > (imgW*1.3):
         img_crop = cv2.rotate(img_crop, cv2.ROTATE_90_CLOCKWISE)
 

@@ -8,6 +8,7 @@ import math
 def make_json(pill_shape, pill_text, pill_line=False):
     # json 기본 구조 설정
     drugData = {
+        "is_success": True,
         "data": [{
             "print": "",
             "chartin": "",

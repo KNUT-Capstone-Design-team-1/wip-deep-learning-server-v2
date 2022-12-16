@@ -6,9 +6,12 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 import wp_utils
-import detect_text
-import text_recog
-import shape_classification
+from detect_text import DetectText
+from text_recog import RecogText
+from shape_classification import ShapeClassification
+
+import time
+import psutil
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -25,12 +28,23 @@ def get_json():
 
     # 이미지 저장 확인
     if (pill_img is not None):
+        # pid = os.getpid()
+        # current_process = psutil.Process(pid)
+        # current_process_memory_usage_as_KB = current_process.memory_info()[0] / 2.**20
+        # print(f"BEFORE  CODE: Current memory KB   : {current_process_memory_usage_as_KB: 9.3f} KB")
+        start = time.time()
         crop_files = detect_text.detect_text_img(
             pill_img)  # 이미지 안의 text 영역 crop
         pill_text = text_recog.img_text_recog(crop_files)  # crop한 text 분석
         pill_shape = shape_classification.detect_pill_shape(
             pill_img)  # 알약의 모양 분석
 
+        end = time.time()
+        # pid = os.getpid()
+        # current_process = psutil.Process(pid)
+        # current_process_memory_usage_as_KB = current_process.memory_info()[0] / 2.**20
+        # print(f"AFTER  CODE: Current memory KB   : {current_process_memory_usage_as_KB: 9.3f} KB")
+        print(f"all process : {end - start:.5f} sec")
         # 알약의 특징 정보를 json 파일로 저장
         json_data = wp_utils.make_json(
             pill_shape=pill_shape, pill_text=pill_text)
@@ -71,4 +85,7 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
+    detect_text = DetectText()
+    text_recog = RecogText()
+    shape_classification = ShapeClassification()
     app.run(host="0.0.0.0", port="5000")

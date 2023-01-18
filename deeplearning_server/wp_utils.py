@@ -17,8 +17,8 @@ def make_json(pill_shape, pill_text, pill_line=False):
             "line_front": "",
         }]
     }
-    drugData["data"][0]["print"] = pill_shape  # 알약 모양
-    drugData["data"][0]["drug_shape"] = pill_text  # 알약 문자
+    drugData["data"][0]["print"] = pill_text  # 알약 모양
+    drugData["data"][0]["drug_shape"] = pill_shape  # 알약 문자
     # drugData["drug_line"] = pill_line
 
     json_data = json.dumps(drugData, ensure_ascii=False, indent='\t')

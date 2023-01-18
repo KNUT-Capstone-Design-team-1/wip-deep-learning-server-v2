@@ -14,6 +14,6 @@ td_model_name = 'craft_mlt_25k.pth'
 ps_model_name = 'pill_shape_fine_tuned.pt'
 tr_model_name = 'pill_recog_model.pth'
 
-gdown.download(text_detect_model, model_dir+'/'+td_model_name, resume=True)
-gdown.download(pill_shape_model, model_dir+'/'+ps_model_name)
-gdown.download(text_recog_model, model_dir+'/'+tr_model_name)
+gdown.download(text_detect_model, model_dir+'/'+td_model_name, quiet=False)
+gdown.download(pill_shape_model, model_dir+'/'+ps_model_name, quiet=False)
+gdown.download(text_recog_model, model_dir+'/'+tr_model_name, quiet=False)

@@ -1,5 +1,7 @@
 FROM python:3.8.1
 
+EXPOSE 17261
+
 # 컨테이너 내 디렉터리로 파일 복사
 COPY . /usr/local/wip-dl
 WORKDIR /usr/local/wip-dl

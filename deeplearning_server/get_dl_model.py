@@ -1,18 +1,22 @@
 import gdown
 import os
 
-text_detect_model = 'https://drive.google.com/uc?id=1Jk4eGD7crsqCCg9C9VjCLkMN3ze8kutZ'
-pill_shape_model = 'https://drive.google.com/uc?id=12U-grcJXRO6YtLwp3GWBbe-FSWT8B4su&confirm=t'
-text_recog_model = 'https://drive.google.com/uc?id=1yLixadZ_3Ls4x_TR0-8MG6-iQSEn5ZSG&confirm=t'
+import dotenv
+env_file = dotenv.find_dotenv()
+dotenv.load_dotenv(env_file)
 
-model_dir = './deeplearning_server/weights'
+text_detect_model = os.getenv("TEXT_DETECT_URL")
+pill_shape_model = os.getenv("PILL_SHAPE_URL")
+text_recog_model = os.getenv("TEXT_RECOG_URL")
 
-if(not os.path.isdir(model_dir)):
+model_dir = os.getenv("MODEL_SAVE_DIR")
+
+if (not os.path.isdir(model_dir)):
     os.mkdir(model_dir)
 
-td_model_name = 'craft_mlt_25k.pth'
-ps_model_name = 'pill_shape_fine_tuned.pt'
-tr_model_name = 'pill_recog_model.pth'
+td_model_name = os.getenv("TEXT_DETECT_MODEL_NAME")
+ps_model_name = os.getenv("PILL_SHAPE_MODEL_NAME")
+tr_model_name = os.getenv("TEXT_RECOG_MODEL_NAME")
 
 gdown.download(text_detect_model, model_dir+'/'+td_model_name, quiet=False)
 gdown.download(pill_shape_model, model_dir+'/'+ps_model_name, quiet=False)

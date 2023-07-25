@@ -13,6 +13,20 @@ from shape_classification import ShapeClassification
 import time
 import psutil
 
+import dotenv
+env_file = dotenv.find_dotenv()
+dotenv.load_dotenv(env_file)
+
+# 모델들 파일 경로 불러오기
+model_dir = os.getenv("MODEL_SAVE_DIR")
+
+td_model_path = os.path.join(model_dir, os.getenv("TEXT_DETECT_MODEL_NAME"))
+ps_model_path = os.path.join(model_dir, os.getenv("PILL_SHAPE_MODEL_NAME"))
+tr_model_path = os.path.join(model_dir, os.getenv("TEXT_RECOG_MODEL_NAME"))
+
+# 포트 번호 불러오기
+port_num = os.getenv("DL_PORT_NUMBER")
+
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
@@ -85,7 +99,7 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    detect_text = DetectText()
-    text_recog = RecogText()
-    shape_classification = ShapeClassification()
-    app.run(host="0.0.0.0", port="5000")
+    detect_text = DetectText(td_model_path)
+    text_recog = RecogText(tr_model_path)
+    shape_classification = ShapeClassification(ps_model_path)
+    app.run(host="0.0.0.0", port=port_num)

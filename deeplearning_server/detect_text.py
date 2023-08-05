@@ -7,9 +7,6 @@ import numpy as np
 from CRAFT_pytorch import craft_utils, imgproc
 from CRAFT_pytorch.craft import CRAFT
 
-import time
-import psutil
-
 import wp_utils
 
 from collections import OrderedDict
@@ -57,15 +54,9 @@ class DetectText:
 
     def detect_net(self, image):
         # 이미지 resize
-        # start = time.time()
         img_resized, target_ratio, size_heatmap = imgproc.resize_aspect_ratio(
             image, self.canvas_size, interpolation=cv2.INTER_LINEAR, mag_ratio=self.mag_ratio)
-        # pid = os.getpid()
-        # current_process = psutil.Process(pid)
-        # current_process_memory_usage_as_KB = current_process.memory_info()[0] / 2.**20
-        # print(f"Image  CODE: Current memory KB   : {current_process_memory_usage_as_KB: 9.3f} KB")
-        # end = time.time()
-        # print(f"image transfer : {end - start:.5f} sec")
+
         ratio_h = ratio_w = 1 / target_ratio
 
         # 이미지 전처리

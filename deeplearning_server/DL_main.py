@@ -1,3 +1,4 @@
+import dotenv
 from flask import Flask, request, jsonify
 import json
 import base64
@@ -10,7 +11,16 @@ from detect_text import DetectText
 from text_recog import RecogText
 from shape_classification import ShapeClassification
 
-import dotenv
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+logger = logging.getLogger("dl_server.dl_main")
+
 env_file = dotenv.find_dotenv()
 dotenv.load_dotenv(env_file)
 
@@ -56,7 +66,7 @@ def get_json():
         return jsonify(json_data)
 
     else:
-        print("No Image")
+        logger.debug("No Image")
         return jsonify({"is_success": False, "message": "Image Wirte Failed"}, 500)
 
 
@@ -70,7 +80,7 @@ def decode_image(imjson):
         return pill_Image
 
     except:
-        print("Image Write Failed")
+        logger.debug("Image Write Failed")
         return None
 
 
@@ -85,7 +95,14 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    detect_text = DetectText(td_model_path)
-    text_recog = RecogText(tr_model_path)
-    shape_classification = ShapeClassification(ps_model_path)
+    try:
+        detect_text = DetectText(td_model_path)
+        logger.debug("Text Detect Model Load Success!")
+        text_recog = RecogText(tr_model_path)
+        logger.debug("Text Recog Model Load Success!")
+        shape_classification = ShapeClassification(ps_model_path)
+        logger.debug("Pill Shape Model Load Success!")
+    except Exception as e:
+        logger.error(f'Failed Load Model {e}')
+    app.logger.info("server start :: PORT=" + str(port_num))
     app.run(host="0.0.0.0", port=port_num)

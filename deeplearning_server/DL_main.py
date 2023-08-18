@@ -29,6 +29,7 @@ model_dir = os.getenv("MODEL_SAVE_DIR")
 
 td_model_path = os.path.join(model_dir, os.getenv("TEXT_DETECT_MODEL_NAME"))
 ps_model_path = os.path.join(model_dir, os.getenv("PILL_SHAPE_MODEL_NAME"))
+ps_pre_model_path = os.path.join(model_dir, os.getenv("PILL_PRE_MODEL_NAME"))
 tr_model_path = os.path.join(model_dir, os.getenv("TEXT_RECOG_MODEL_NAME"))
 
 # 포트 번호 불러오기
@@ -102,7 +103,8 @@ if __name__ == '__main__':
         logger.debug("Text Detect Model Load Success!")
         text_recog = RecogText(tr_model_path)
         logger.debug("Text Recog Model Load Success!")
-        shape_classification = ShapeClassification(ps_model_path)
+        shape_classification = ShapeClassification(
+            ps_model_path, ps_pre_model_path)
         logger.debug("Pill Shape Model Load Success!")
     except Exception as e:
         logger.error(f'Failed Load Model {e}')

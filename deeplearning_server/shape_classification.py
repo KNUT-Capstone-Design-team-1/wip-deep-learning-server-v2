@@ -7,12 +7,13 @@ from PIL import Image
 
 
 class ShapeClassification:
-    def __init__(self, model_path):
+    def __init__(self, model_path, pre_model_path):
         # 신경망 초기화
         model_name = 'efficientnet-b7'
 
         # 학습된 모델 불러오기
-        self.model = EfficientNet.from_pretrained(model_name, num_classes=2)
+        self.model = EfficientNet.from_pretrained(
+            model_name=model_name, weights_path=pre_model_path, num_classes=2)
         self.model.load_state_dict(torch.load(model_path, map_location='cpu'))
         self.model.eval()
 

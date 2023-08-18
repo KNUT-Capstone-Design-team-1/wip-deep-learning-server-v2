@@ -34,7 +34,7 @@ tr_model_path = os.path.join(model_dir, os.getenv("TEXT_RECOG_MODEL_NAME"))
 # 포트 번호 불러오기
 port_num = os.getenv("DL_PORT_NUMBER")
 
-logger.info("port: ", port_num)
+logger.info(f'port: {port_num}')
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -106,5 +106,6 @@ if __name__ == '__main__':
         logger.debug("Pill Shape Model Load Success!")
     except Exception as e:
         logger.error(f'Failed Load Model {e}')
-    app.logger.info("server start :: PORT=" + str(port_num))
+
+    logger.info("server start :: PORT=" + str(port_num))
     app.run(host="0.0.0.0", port=port_num)

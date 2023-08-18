@@ -16,10 +16,10 @@ RUN apt-get update && apt-get -y install libgl1-mesa-glx libapache2-mod-wsgi \
     && /usr/local/bin/python -m pip install --upgrade pip \
     && pip3 install compiler \
     && pip3 install -r /usr/local/wip-dl/requirements.txt \
-    && python3 /usr/local/wip-dl/deeplearning_server/get_dl_model.py
+    && python3 /usr/local/wip-dl/get_dl_model.py
 
 # 포트
 EXPOSE $DL_PORT_NUMBER
 
 # 실행
-ENTRYPOINT [ "python3", "/usr/local/wip-dl/deeplearning_server/DL_main.py" ]
+ENTRYPOINT [ "python3", "/usr/local/wip-dl/DL_main.py" ]

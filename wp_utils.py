@@ -8,22 +8,21 @@ import math
 def make_json(pill_shape, pill_text, pill_line=False):
     # json 기본 구조 설정
     drugData = {
-        "is_success": True,
+        "success": True,
         "data": [{
             "print": "",
             "chartn": "",
             "drug_shape": "",
             "color_class": "",
             "line_front": "",
-        }]
+        }],
+        "message": "success"
     }
     drugData["data"][0]["print"] = pill_text  # 알약 모양
     drugData["data"][0]["drug_shape"] = pill_shape  # 알약 문자
     # drugData["drug_line"] = pill_line
 
-    json_data = json.dumps(drugData, ensure_ascii=False, indent='\t')
-
-    return json_data
+    return drugData
 
 # crop한 text영역 이미지 회전 (croped img, polys=영역 좌표, 중심좌표)
 

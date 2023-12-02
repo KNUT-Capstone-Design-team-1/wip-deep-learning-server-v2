@@ -70,7 +70,7 @@ def get_json():
 
     else:
         logger.debug("No Image")
-        return jsonify({"is_success": False, "message": "Image Wirte Failed"}, 500)
+        return jsonify({"is_success": False, "message": "Image Wirte Failed"}), 500
 
 
 def decode_image(imjson):
@@ -89,12 +89,12 @@ def decode_image(imjson):
 
 @app.errorhandler(500)
 def error_500():
-    return jsonify({"is_success": False, "message": "Server not work"}, 500)
+    return jsonify({"is_success": False, "message": "Server not work"}), 500
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return jsonify({"is_success": False, "message": "page not found"}, 404)
+    return jsonify({"is_success": False, "message": "page not found"}), 404
 
 
 if __name__ == '__main__':

@@ -11,7 +11,7 @@ def make_json(pill_shape, pill_text, pill_line=False):
         "success": True,
         "data": [{
             "print": "",
-            "chartn": "",
+            "chartin": "",
             "drug_shape": "",
             "color_class": "",
             "line_front": "",

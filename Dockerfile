@@ -1,10 +1,10 @@
 FROM python:3.8.1
 
 # Arguments
-ARG DL_PORT_NUMBER
+ARG DL_SERVER_PORT
 
 # 환경 변수
-ENV DL_PORT_NUMBER=$DL_PORT_NUMBER
+ENV DL_SERVER_PORT=$DL_SERVER_PORT
 
 # 컨테이너 내 디렉터리로 파일 복사
 COPY . /usr/local/wip-dl
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get -y install libgl1-mesa-glx libapache2-mod-wsgi \
     && python3 /usr/local/wip-dl/get_dl_model.py
 
 # 포트
-EXPOSE $DL_PORT_NUMBER
+EXPOSE $DL_SERVER_PORT
 
 # 실행
 ENTRYPOINT [ "python3", "/usr/local/wip-dl/DL_main.py" ]

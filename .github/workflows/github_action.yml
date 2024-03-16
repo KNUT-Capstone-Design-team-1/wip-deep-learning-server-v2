@@ -1,0 +1,48 @@
+name: what-is-pill-deeplearning-server-cicd
+
+run-name: ${{ github.actor }} run cicd
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_mode:
+        description: 'set deploy mode'
+        required: true
+        default: 'BUILD-ONLY'
+        type: choice
+        options:
+          - BUILD-ONLY
+          - STAND-ALONE
+          - SINGLE-CONTAINER
+          - DOCKER-COMPOSE
+
+jobs:
+  run-pull:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: install ssh keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -t rsa -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+
+      - if: contains(fromJSON('["STAND-ALONE", "SINGLE-CONTAINER"]'), github.event.inputs.deploy_mode)
+        name: run single mode
+        run: |
+          ssh -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+          "cd ${{ secrets.WORK_DIR_DL }} && \
+           git pull && \
+           bash run.sh ${{ github.event.inputs.deploy_mode }}"
+    
+      - if: contains(fromJSON('["DOCKER-COMPOSE"]'), github.event.inputs.deploy_mode)
+        name: run multiple mode
+        run: |
+          ssh -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+          "cd ${{ secrets.WORK_DIR_DL }} && \
+           git pull && \
+           cd ${{ secrets.WORK_DIR_INFRA }} && \
+           bash run.sh ${{ github.event.inputs.deploy_mode }}"
+
+      - name: cleanup
+        run: rm -rf ~/.ssh

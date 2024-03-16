@@ -30,7 +30,7 @@ jobs:
       - if: contains(fromJSON('["STAND-ALONE", "SINGLE-CONTAINER"]'), github.event.inputs.deploy_mode)
         name: run single mode
         run: |
-          ssh -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+          ssh -o ServerAliveInterval=3600 -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
           "cd ${{ secrets.WORK_DIR_DL }} && \
            git pull && \
            bash run.sh ${{ github.event.inputs.deploy_mode }}"
@@ -38,7 +38,7 @@ jobs:
       - if: contains(fromJSON('["DOCKER-COMPOSE"]'), github.event.inputs.deploy_mode)
         name: run multiple mode
         run: |
-          ssh -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+          ssh -o ServerAliveInterval=3600 -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
           "cd ${{ secrets.WORK_DIR_DL }} && \
            git pull && \
            cd ${{ secrets.WORK_DIR_INFRA }} && \

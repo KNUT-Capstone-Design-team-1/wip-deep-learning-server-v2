@@ -1,0 +1,14 @@
+#!/bin/bash
+
+sudo apt update 
+
+# required lib install
+sudo apt install -y python3.8
+sudo apt install -y libgl1-mesa-glx libapache2-mod-wsgi
+python3 -m pip install --upgrade pip
+sudo pip3 install compiler
+sudo pip3 install python-dotenv
+
+# service daemon setting
+sudo cp ./system/wip-deep-learning-server-v2.service /etc/systemd/system/wip-deep-learning-server-v2.service
+sudo systemctl enable wip-deep-learning-server-v2

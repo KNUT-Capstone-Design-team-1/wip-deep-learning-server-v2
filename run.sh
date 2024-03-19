@@ -27,7 +27,7 @@ if [ $1 = "STAND-ALONE" ]; then
   echo "---- OK ----"
 elif [ $1 = "SINGLE-CONTAINER" ]; then
   echo "---- Build Container image ----"
-  build_cmd="docker build --no-cache --pull . -t wip-deep-learning-server-v2"
+  build_cmd="docker build . -t wip-deep-learning-server-v2"
 
   while read line; do
     arg_temp=$(echo $line | cut -f 1 -d'=')
@@ -41,11 +41,11 @@ elif [ $1 = "SINGLE-CONTAINER" ]; then
   docker container rm -f wip-deep-learning-server-v2
   echo "---- OK ----"
 
-  echo "---- Run container ----"
-  docker run -d --name wip-deep-learning-server-v2 wip-deep-learning-server-v2
+  echo "---- Remove previous image ----"
+  docker rmi $(docker images -q wip-main-server-v2)
   echo "---- OK ----"
 
-  echo "---- Remove previous image ----"
-  docker image prune -f
+  echo "---- Run container ----"
+  docker run -d --name wip-deep-learning-server-v2 wip-deep-learning-server-v2
   echo "---- OK ----"
 fi

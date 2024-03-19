@@ -46,6 +46,6 @@ elif [ $1 = "SINGLE-CONTAINER" ]; then
   echo "---- OK ----"
 
   echo "---- Remove previous image ----"
-  docker images prune -f
+  docker image prune -f
   echo "---- OK ----"
 fi

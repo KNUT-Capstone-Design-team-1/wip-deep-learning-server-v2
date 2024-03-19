@@ -16,7 +16,7 @@ echo "---- $1 ----"
 
 if [ $1 = "STAND-ALONE" ]; then
   sudo systemctl stop wip-deep-learning-server-v2
-  sudo pip3 install -r /must_be_madness/what_is_pill/wip-deep-learning-server-v2/requirements.txt
+  sudo pip3 install --upgrade --force-reinstall -r /must_be_madness/what_is_pill/wip-deep-learning-server-v2/requirements.txt
   sudo python3 /must_be_madness/what_is_pill/wip-deep-learning-server-v2/get_dl_model.py
   sudo systemctl start wip-deep-learning-server-v2
 elif [ $1 = "SINGLE-CONTAINER" ]; then

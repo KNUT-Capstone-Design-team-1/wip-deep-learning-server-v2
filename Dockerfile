@@ -8,7 +8,7 @@ COPY . /usr/local/wip-deep-learning-server-v2
 WORKDIR /usr/local/wip-deep-learning-server-v2
 USER root
 
-ONBUILD RUN apt-get update && apt-get -y install libgl1-mesa-glx libapache2-mod-wsgi \
+RUN apt-get update && apt-get -y install libgl1-mesa-glx libapache2-mod-wsgi \
     && /usr/local/bin/python -m pip install --upgrade pip \
     && pip3 install compiler \
     && pip3 install -r /usr/local/wip-deep-learning-server-v2/requirements.txt \

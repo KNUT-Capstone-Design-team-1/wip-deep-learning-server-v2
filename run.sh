@@ -27,7 +27,7 @@ if [ $1 = "STAND-ALONE" ]; then
   echo "---- OK ----"
 elif [ $1 = "SINGLE-CONTAINER" ]; then
   echo "---- Build container image ----"
-  build_cmd="docker build --no-cache --pull . -t wip-deep-learning-server-v2"
+  build_cmd="docker build --no-cache . -t wip-deep-learning-server-v2"
 
   while read line; do
     arg_temp=$(echo $line | cut -f 1 -d'=')

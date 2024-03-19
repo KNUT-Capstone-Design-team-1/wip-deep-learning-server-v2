@@ -44,4 +44,8 @@ elif [ $1 = "SINGLE-CONTAINER" ]; then
   echo "---- Run container ----"
   docker run -d --name wip-deep-learning-server-v2 wip-deep-learning-server-v2
   echo "---- OK ----"
+
+  echo "---- Remove previous image ----"
+  docker images prune -f
+  echo "---- OK ----"
 fi

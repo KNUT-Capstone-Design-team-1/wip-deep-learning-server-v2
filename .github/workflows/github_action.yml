@@ -32,7 +32,7 @@ jobs:
         run: |
           ssh -o ServerAliveInterval=3600 -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
           "cd ${{ secrets.WORK_DIR_MAIN }} && \
-           git pull
+           git pull"
 
       - if: contains(fromJSON('["STAND-ALONE", "SINGLE-CONTAINER"]'), github.event.inputs.deploy_mode)
         name: run single mode

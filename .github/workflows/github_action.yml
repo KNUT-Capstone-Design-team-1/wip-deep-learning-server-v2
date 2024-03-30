@@ -31,7 +31,7 @@ jobs:
         name: run build only
         run: |
           ssh -o ServerAliveInterval=3600 -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-          "cd ${{ secrets.WORK_DIR_MAIN }} && \
+          "cd ${{ secrets.WORK_DIR_DL }} && \
            git pull"
 
       - if: contains(fromJSON('["STAND-ALONE", "SINGLE-CONTAINER"]'), github.event.inputs.deploy_mode)

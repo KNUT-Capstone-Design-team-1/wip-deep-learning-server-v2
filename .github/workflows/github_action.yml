@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       deploy_mode:
-        description: 'set deploy mode'
+        description: "set deploy mode"
         required: true
-        default: 'BUILD-ONLY'
+        default: "BUILD-ONLY"
         type: choice
         options:
           - BUILD-ONLY
@@ -27,6 +27,13 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -t rsa -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
 
+      - if: contains(fromJSON('["BUILD-ONLY"]'), github.event.inputs.deploy_mode)
+        name: run build only
+        run: |
+          ssh -o ServerAliveInterval=3600 -vT ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+          "cd ${{ secrets.WORK_DIR_MAIN }} && \
+           git pull
+
       - if: contains(fromJSON('["STAND-ALONE", "SINGLE-CONTAINER"]'), github.event.inputs.deploy_mode)
         name: run single mode
         run: |
@@ -34,7 +41,7 @@ jobs:
           "cd ${{ secrets.WORK_DIR_DL }} && \
            git pull && \
            bash run.sh ${{ github.event.inputs.deploy_mode }}"
-    
+
       - if: contains(fromJSON('["DOCKER-COMPOSE"]'), github.event.inputs.deploy_mode)
         name: run multiple mode
         run: |

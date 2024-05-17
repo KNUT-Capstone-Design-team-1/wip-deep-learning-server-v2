@@ -77,7 +77,7 @@ def decode_image(imjson):
     try:
         # base64 데이터를 이미지로 변환(decoding)
         pill_Image = Image.open(
-            BytesIO(base64.b64decode(imjson['img_base64'])))
+            BytesIO(base64.b64decode(imjson['base64'])))
         pill_Image = np.array(pill_Image)
 
         return pill_Image

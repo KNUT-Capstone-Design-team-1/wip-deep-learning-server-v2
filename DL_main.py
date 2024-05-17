@@ -33,7 +33,7 @@ ps_pre_model_path = os.path.join(model_dir, os.getenv("PILL_PRE_MODEL_NAME"))
 tr_model_path = os.path.join(model_dir, os.getenv("TEXT_RECOG_MODEL_NAME"))
 
 # 포트 번호 불러오기
-port_num = os.getenv("DL_PORT_NUMBER")
+port_num = os.getenv("DL_SERVER_PORT")
 
 logger.info(f'port: {port_num}')
 

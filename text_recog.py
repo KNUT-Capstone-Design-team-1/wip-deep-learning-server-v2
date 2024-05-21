@@ -134,10 +134,13 @@ class RecogText:
 
     def img_text_recog(self, img_list):
         # text 분석
-        pill_text = self.recog_net(self.opt, self.device, img_list)
-        pill_text.reverse()
-        pill_text = "".join(pill_text)
-        return pill_text
+        try:
+            pill_text = self.recog_net(self.opt, self.device, img_list)
+            pill_text.reverse()
+            pill_text = "".join(pill_text)
+            return pill_text
+        except:
+            return None
 
 # parser = argparse.ArgumentParser()
 # parser.add_argument('--workers', type=int, help='number of data loading workers', default=0)

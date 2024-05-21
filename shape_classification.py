@@ -43,3 +43,4 @@ class ShapeClassification:
             return pill_shape
         except:
             print("shape_classification error")
+            return None

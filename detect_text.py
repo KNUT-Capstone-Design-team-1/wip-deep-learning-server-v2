@@ -117,3 +117,4 @@ class DetectText:
             return crop_files
         except:
             print('no image')
+            return None

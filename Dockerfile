@@ -13,7 +13,8 @@ RUN apt update && apt -y install \
   libapache2-mod-wsgi \
   tcpdump \
   net-tools \
-  vim
+  vim \
+  tzdata
 
 RUN /usr/local/bin/python -m pip install --upgrade pip && \
   pip3 install compiler && \

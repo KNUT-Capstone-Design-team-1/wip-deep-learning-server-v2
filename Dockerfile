@@ -3,6 +3,7 @@ FROM python:3.8.1
 ARG DL_SERVER_PORT
 
 ENV DL_SERVER_PORT=$DL_SERVER_PORT
+ENV TZ=Asia/Seoul
 
 COPY . /usr/local/wip-deep-learning-server-v2
 WORKDIR /usr/local/wip-deep-learning-server-v2

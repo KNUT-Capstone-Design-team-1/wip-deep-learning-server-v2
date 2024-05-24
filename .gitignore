@@ -9,3 +9,4 @@ weight/
 figures/
 build/
 deeplearning_server.egg-info/
+test/local_test/

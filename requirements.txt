@@ -6,7 +6,6 @@ opencv-python ~= 4.4.0
 scipy ~= 1.4.1
 scikit-image ~= 0.18.1
 pillow >= 8.3.2
-lmdb ~= 1.2.1
 natsort ~= 7.1.1
 efficientnet_pytorch ~= 0.7.0
 gdown ~= 4.2.0

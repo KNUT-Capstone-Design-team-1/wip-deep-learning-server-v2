@@ -55,20 +55,20 @@ def get_json():
         crop_files = detect_text.detect_text_img(
             pill_img)  # 이미지 안의 text 영역 crop
 
-        if crop_files is None:
+        if len(crop_files) == 0:
             logger.debug("Text Detect Failed")
             return jsonify({"success": False, "message": "Text Detect Failed"}), 500
 
         pill_text = text_recog.img_text_recog(crop_files)  # crop한 text 분석
 
-        if pill_text is None:
+        if pill_text == "":
             logger.debug("Text Recognition Failed")
             return jsonify({"success": False, "message": "Text Recognition Failed"}), 500
 
         pill_shape = shape_classification.detect_pill_shape(
             pill_img)  # 알약의 모양 분석
 
-        if pill_shape is None:
+        if pill_shape == "":
             logger.debug("Pill Shape Detect Failed")
             return jsonify({"success": False, "message": "Pill Shape Detect Failed"}), 500
 

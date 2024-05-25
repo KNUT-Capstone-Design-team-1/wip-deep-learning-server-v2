@@ -40,6 +40,9 @@ logger.info(f'port: {port_num}')
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
+with open(".error-msg.json", "r") as f:
+    error_msg = json.load(f)
+
 # get_json 함수 호출 주소 및 형식 지정
 
 
@@ -57,20 +60,20 @@ def get_json():
 
         if len(crop_files) == 0:
             logger.debug("Text Detect Failed")
-            return jsonify({"success": False, "message": "Text Detect Failed"}), 500
+            return jsonify({"success": False, "message": error_msg["error.detect"]}), 200
 
         pill_text = text_recog.img_text_recog(crop_files)  # crop한 text 분석
 
         if pill_text == "":
             logger.debug("Text Recognition Failed")
-            return jsonify({"success": False, "message": "Text Recognition Failed"}), 500
+            return jsonify({"success": False, "message": error_msg["error.text"]}), 200
 
         pill_shape = shape_classification.detect_pill_shape(
             pill_img)  # 알약의 모양 분석
 
         if pill_shape == "":
             logger.debug("Pill Shape Detect Failed")
-            return jsonify({"success": False, "message": "Pill Shape Detect Failed"}), 500
+            return jsonify({"success": False, "message": error_msg["error.shape"]}), 200
 
         # 알약의 특징 정보를 json 파일로 저장
         json_data = wp_utils.make_json(
@@ -84,7 +87,7 @@ def get_json():
 
     else:
         logger.debug("No Image")
-        return jsonify({"success": False, "message": "Image Wirte Failed"}), 500
+        return jsonify({"success": False, "message": error_msg["error.no-image"]}), 200
 
 
 def decode_image(imjson):
@@ -103,12 +106,12 @@ def decode_image(imjson):
 
 @app.errorhandler(500)
 def error_500():
-    return jsonify({"success": False, "message": "Server not work"}), 500
+    return jsonify({"success": False, "message": error_msg["error.general"]}), 500
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return jsonify({"success": False, "message": "page not found"}), 404
+    return jsonify({"success": False, "message": error_msg["error.general"]}), 404
 
 
 if __name__ == '__main__':

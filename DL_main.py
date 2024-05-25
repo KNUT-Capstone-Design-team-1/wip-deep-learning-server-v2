@@ -60,20 +60,23 @@ def get_json():
 
         if len(crop_files) == 0:
             logger.debug("Text Detect Failed")
-            return jsonify({"success": False, "message": error_msg["error.detect"]}), 200
+            msg = error_msg["error.detect"]
+            return jsonify({"success": False, "message": msg}), 200
 
         pill_text = text_recog.img_text_recog(crop_files)  # crop한 text 분석
 
         if pill_text == "":
             logger.debug("Text Recognition Failed")
-            return jsonify({"success": False, "message": error_msg["error.text"]}), 200
+            msg = error_msg["error.text"]
+            return jsonify({"success": False, "message": msg}), 200
 
         pill_shape = shape_classification.detect_pill_shape(
             pill_img)  # 알약의 모양 분석
 
         if pill_shape == "":
             logger.debug("Pill Shape Detect Failed")
-            return jsonify({"success": False, "message": error_msg["error.shape"]}), 200
+            msg = error_msg["error.shape"]
+            return jsonify({"success": False, "message": msg}), 200
 
         # 알약의 특징 정보를 json 파일로 저장
         json_data = wp_utils.make_json(
@@ -87,7 +90,8 @@ def get_json():
 
     else:
         logger.debug("No Image")
-        return jsonify({"success": False, "message": error_msg["error.no-image"]}), 200
+        msg = error_msg["error.no-image"]
+        return jsonify({"success": False, "message": msg}), 200
 
 
 def decode_image(imjson):
@@ -106,12 +110,14 @@ def decode_image(imjson):
 
 @app.errorhandler(500)
 def error_500():
-    return jsonify({"success": False, "message": error_msg["error.general"]}), 500
+    msg = error_msg["error.general"]
+    return jsonify({"success": False, "message": msg}), 500
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return jsonify({"success": False, "message": error_msg["error.general"]}), 404
+    msg = error_msg["error.general"]
+    return jsonify({"success": False, "message": msg}), 404
 
 
 if __name__ == '__main__':

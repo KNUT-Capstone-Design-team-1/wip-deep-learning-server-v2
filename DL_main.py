@@ -40,7 +40,7 @@ logger.info(f'port: {port_num}')
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
-with open(".error-msg.json", "r") as f:
+with open("error-msg.json", "r") as f:
     error_msg = json.load(f)
 
 # get_json 함수 호출 주소 및 형식 지정

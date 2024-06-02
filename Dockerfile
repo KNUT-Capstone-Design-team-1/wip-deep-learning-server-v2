@@ -1,4 +1,4 @@
-FROM python:3.8.1
+FROM python:3.10.14
 
 ARG DL_SERVER_PORT
 
@@ -24,4 +24,4 @@ RUN /usr/local/bin/python -m pip install --upgrade pip && \
 
 EXPOSE $DL_SERVER_PORT
 
-ENTRYPOINT [ "python3", "/usr/local/wip-deep-learning-server-v2/DL_main.py" ]
+ENTRYPOINT [ "python3", "/usr/local/wip-deep-learning-server-v2/server.py" ]

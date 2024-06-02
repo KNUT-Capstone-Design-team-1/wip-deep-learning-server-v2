@@ -1,13 +1,16 @@
 Flask
---find-links https://download.pytorch.org/whl/torch_stable.html
-torch == 1.7.1+cpu
-torchvision == 0.8.2+cpu
-opencv-python ~= 4.4.0
-scipy ~= 1.4.1
-scikit-image ~= 0.18.1
-pillow >= 8.3.2
-natsort ~= 7.1.1
-efficientnet_pytorch ~= 0.7.0
-gdown ~= 4.2.0
+--find-links https://download.pytorch.org/whl/cpu
+torch == 2.0.1
+torchvision == 0.15.2
+opencv-python ~= 4.9.0
+pillow
+gdown ~= 5.2.0
 python-dotenv ~= 1.0.0
-numpy == 1.21
+ultralytics
+transformers
+supervision
+pycocotools
+yapf
+addict
+timm
+onnx == 1.13.0

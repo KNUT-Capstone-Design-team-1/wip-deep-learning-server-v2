@@ -6,8 +6,7 @@ import supervision as sv
 
 import numpy as np
 
-from memory_profiler import profile
-
+from typing import List
 
 class GdinoModel:
     def __init__(self, checkpoint, device="cpu") -> None:
@@ -18,8 +17,7 @@ class GdinoModel:
             device=device
         )
 
-    @profile
-    def predict(self, image: np.ndarray, classes: list, box_threshold=0.25, text_threshold=0.15) -> sv.Detections:
+    def predict(self, image: np.ndarray, classes: List, box_threshold=0.25, text_threshold=0.15) -> sv.Detections:
 
         detections = self.model.predict_with_classes(
             image=image,

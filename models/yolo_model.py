@@ -1,5 +1,6 @@
 from ultralytics import YOLO
 from PIL import Image
+from typing import List
 
 
 class YoloModel:
@@ -11,7 +12,7 @@ class YoloModel:
     def reset(self):
         self.item_seqs = {}
 
-    def predict(self, images: list[Image.Image]):
+    def predict(self, images: List[Image.Image]):
 
         # for image in images:
         results = self.model.predict(

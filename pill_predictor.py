@@ -6,6 +6,8 @@ import base64
 import numpy as np
 import cv2
 
+from typing import Dict
+
 from utils.json_encoder import JsonEncoder
 from utils.image_preprocess import ImagePreprocess
 
@@ -39,7 +41,7 @@ class PillPredictor:
 
         self.image = None
 
-    def set_image_form_json(self, params: dict):
+    def set_image_form_json(self, params: Dict):
         try:
             self.image = cv2.imdecode(
                 np.fromstring(

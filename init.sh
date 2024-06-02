@@ -2,7 +2,7 @@
 sudo apt update 
 
 # required lib install
-sudo apt install -y python3.10
+sudo apt install -y python3.8
 sudo apt install -y libgl1-mesa-glx libapache2-mod-wsgi
 python3 -m pip install --upgrade pip
 sudo pip3 install --upgrade --ignore-installed compiler

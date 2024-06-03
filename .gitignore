@@ -1,6 +1,8 @@
 *.png
+*.jpg
 *.gif
 *.pt
+*.onnx
 *.pyc
 *.pth
 __pycache__/

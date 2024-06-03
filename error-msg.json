@@ -1,7 +1,5 @@
 {
   "error.general": "pill-search.error.general",
-  "error.detect": "pill-search.error.get-detection-data",
-  "error.text": "pill-search.error.get-recognition-data",
-  "error.shape": "pill-search.error.get-shape-data",
+  "error.predict": "pill-search.error.pill-predict",
   "error.no-image": "pill-search.error.no-image"
 }

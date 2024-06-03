@@ -1,4 +1,4 @@
-FROM python:3.8.1
+FROM python:3.8
 
 ARG DL_SERVER_PORT
 
@@ -19,9 +19,9 @@ RUN apt update && apt -y install \
 
 RUN /usr/local/bin/python -m pip install --upgrade pip && \
   pip3 install compiler && \
-  pip3 install -r /usr/local/wip-deep-learning-server-v2/requirements.txt && \
+  pip3 install --no-cache-dir -r /usr/local/wip-deep-learning-server-v2/requirements.txt && \
   python3 /usr/local/wip-deep-learning-server-v2/get_dl_model.py
 
 EXPOSE $DL_SERVER_PORT
 
-ENTRYPOINT [ "python3", "/usr/local/wip-deep-learning-server-v2/DL_main.py" ]
+ENTRYPOINT [ "python3", "/usr/local/wip-deep-learning-server-v2/server.py" ]

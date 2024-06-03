@@ -7,7 +7,7 @@ User=ubuntu
 Group=ubuntu
 EnvironmentFile=/must_be_madness/what_is_pill/wip-deep-learning-server-v2/.env
 WorkingDirectory=/must_be_madness/what_is_pill/wip-deep-learning-server-v2
-ExecStart=python3 /must_be_madness/what_is_pill/wip-deep-learning-server-v2/DL_main.py
+ExecStart=python3 /must_be_madness/what_is_pill/wip-deep-learning-server-v2/server.py
 Restart=always
 
 [Install]

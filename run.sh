@@ -18,7 +18,7 @@ if [ $1 = "STAND-ALONE" ]; then
   echo "---- OK ----"
 
   echo "---- Update require library ----"
-  sudo pip3 install --upgrade --ignore-installed -r /must_be_madness/what_is_pill/wip-deep-learning-server-v2/requirements.txt
+  sudo pip3 install --upgrade --ignore-installed --no-cache-dir -r /must_be_madness/what_is_pill/wip-deep-learning-server-v2/requirements.txt
   sudo python3 /must_be_madness/what_is_pill/wip-deep-learning-server-v2/get_dl_model.py
   echo "---- OK ----"
 

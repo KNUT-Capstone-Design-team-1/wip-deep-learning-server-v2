@@ -11,7 +11,7 @@ USER root
 
 RUN apt update && apt -y install \
   libgl1-mesa-glx \
-  libapache2-mod-wsgi \
+  libapache2-mod-wsgi-py3 \
   tcpdump \
   net-tools \
   vim \

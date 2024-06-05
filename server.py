@@ -59,6 +59,8 @@ def get_pill():
 
         gc.collect()
 
+        logger.debug(pill_json)
+
         return jsonify(pill_json), 200
     else:
         logger.debug("No Image")

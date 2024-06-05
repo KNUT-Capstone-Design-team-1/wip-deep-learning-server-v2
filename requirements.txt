@@ -1,6 +1,7 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch == 2.0.0
 torchvision == 0.15.1
+scipy == 1.10.1
 Flask
 opencv-python ~= 4.9.0
 pillow

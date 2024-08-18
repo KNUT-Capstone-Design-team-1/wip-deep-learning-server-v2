@@ -75,7 +75,7 @@ def error_500(e):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return jsonify({"success": False, "message": error_msg["error.general"]}), 404
+    return jsonify({"success": False, "message": error_msg["error.api-not-found"]}), 404
 
 
 if __name__ == '__main__':

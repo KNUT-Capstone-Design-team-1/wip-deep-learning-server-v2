@@ -1,5 +1,6 @@
 {
   "error.general": "pill-search.error.general",
+  "error.api-not-found": "pill-search.error.api-not-found",
   "error.predict": "pill-search.error.pill-predict",
   "error.no-image": "pill-search.error.no-image"
 }

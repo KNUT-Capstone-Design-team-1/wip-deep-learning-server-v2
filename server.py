@@ -34,7 +34,7 @@ app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
 
-@app.route("/data", methods=['POST'])
+@app.route("/data", methods=['POST'], strict_slashes=False)
 def get_pill():
     # json from request
     params = request.get_json()

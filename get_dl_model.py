@@ -1,6 +1,5 @@
-import dotenv
 import gdown
-import os
+from pathlib import Path
 
 import logging
 
@@ -13,21 +12,18 @@ logging.basicConfig(
 logger = logging.getLogger("dl_server.get_dl_model")
 logger.setLevel(logging.DEBUG)
 
-env_file = dotenv.find_dotenv()
-dotenv.load_dotenv(env_file)
+model_dir = Path("./weights")
 
-model_dir = os.getenv("MODEL_SAVE_DIR")
+if not model_dir.exists():
+    model_dir.mkdir(parents=True)
 
-if (not os.path.isdir(model_dir)):
-    os.mkdir(model_dir)
+# gdino_url = ''
+mobilesam_url = 'https://drive.google.com/uc?id=18qsUfxAeAVYkoJDSpRnZxJ1UrFsEXKh9'
+cls_url = 'https://drive.google.com/uc?id=170N8pvLeqLugZC_Eo4u8WGiqR6ExcLnS'
 
-# gdino_url = os.getenv("GDINO_URL")
-mobilesam_url = os.getenv("MOBILESAM_URL")
-cls_url = os.getenv("CLS_URL")
-
-# gdino_model_name = os.getenv("GDINO_CKPT")
-mobilesam_model_name = os.getenv("MOBILESAM_CKPT")
-cls_model_name = os.getenv("CLS_CKPT")
+# gdino_model_path = str(model_dir / 'pre_gdino_model.pth')
+mobilesam_model_path = str(model_dir / 'mobile_sam.pt')
+cls_model_path = str(model_dir / 'pill_cls_model.pt')
 
 # gdino_file = gdown.download(
 #     gdino_url,
@@ -40,19 +36,13 @@ cls_model_name = os.getenv("CLS_CKPT")
 
 mobilesam_file = gdown.download(
     mobilesam_url,
-    os.path.join(
-        model_dir,
-        mobilesam_model_name
-    ),
+    mobilesam_model_path,
     quiet=False,
 )
 
 cls_file = gdown.download(
     cls_url,
-    os.path.join(
-        model_dir,
-        cls_model_name
-    ),
+    cls_model_path,
     quiet=False,
 )
 

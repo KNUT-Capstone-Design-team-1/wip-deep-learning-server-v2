@@ -1,5 +1,4 @@
-import dotenv
-import os
+from pathlib import Path
 
 import torch
 import base64
@@ -18,23 +17,21 @@ from models.yolo_model import YoloModel
 
 class PillPredictor:
     def __init__(self) -> None:
-        env_file = dotenv.find_dotenv()
-        dotenv.load_dotenv(env_file)
 
         # 모델 불러오기 & 설정
-        model_dir = os.getenv("MODEL_SAVE_DIR")
+        model_dir = Path("./weights")
 
-        # gdino_checkpoint = os.path.join(model_dir, os.getenv('GDINO_CKPT'))
-        sam_checkpoint = os.path.join(model_dir, os.getenv('MOBILESAM_CKPT'))
-        cls_checkpoint = os.path.join(model_dir, os.getenv('CLS_CKPT'))
+        # gdino_checkpoint = model_dir / "pre_gdino_model.pth"
+        sam_checkpoint = model_dir / "mobile_sam.pt"
+        cls_checkpoint = model_dir / "pill_cls_model.pt"
 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-        self.gdino_classes = [os.getenv('GDINO_CLASSES')]
+        self.gdino_classes = ["pill"]
 
-        # self.gdino_model = GdinoModel(gdino_checkpoint, device)
-        self.sam_model = SamModel(sam_checkpoint, device)
-        self.cls_model = YoloModel(cls_checkpoint, device)
+        # self.gdino_model = GdinoModel(str(gdino_checkpoint), device)
+        self.sam_model = SamModel(str(sam_checkpoint), device)
+        self.cls_model = YoloModel(str(cls_checkpoint), device)
 
         self.json_encoder = JsonEncoder()
         self.image_preprocess = ImagePreprocess()

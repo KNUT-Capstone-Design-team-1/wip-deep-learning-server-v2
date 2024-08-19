@@ -2,7 +2,7 @@
 
 ## Information
 
-- DL_main.py : flask server file
+- server.py : flask server file
 - wp_utils.py : Make image feature json, image rotate
 - detect_text.py : find and crop text box
 - text_recog.py : text-recognition from croped images

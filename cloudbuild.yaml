@@ -1,7 +1,0 @@
-steps:
-  - name: "gcr.io/cloud-builders/docker"
-    args:
-      ["build", "-t", "asia-northeast1-docker.pkg.dev/what-is-pill:latest", "."]
-options:
-  env:
-    - "DL_SERVER_PORT=16262"

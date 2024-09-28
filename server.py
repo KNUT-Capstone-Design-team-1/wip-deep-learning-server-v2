@@ -48,7 +48,7 @@ def get_pill():
             pill_predictor.predict()
 
         except Exception as e:
-            logger.debug("Error: pill predict")
+            logger.debug(f'Error: pill predict {e}')
             return jsonify({"success": False, "message": error_msg["error.predict"]}), 200
 
         pill_json = json_encoder.make_json(

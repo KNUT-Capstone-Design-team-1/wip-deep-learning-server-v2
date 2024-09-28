@@ -1,6 +1,6 @@
 steps:
   - name: ubuntu
     args:
-      - docker build -t wip-deep-learning-server-v2 --no-cache  .
+      - docker build -t wip-deep-learning-server-v2 --no-cache .
 options:
   logging: CLOUD_LOGGING_ONLY

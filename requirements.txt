@@ -8,6 +8,7 @@ pillow
 gdown ~= 5.2.0
 python-dotenv ~= 1.0.0
 ultralytics
+dill
 transformers
 supervision
 pycocotools

@@ -1,6 +1,8 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'wip-deep-learning-server-v2', '--no-cache', '.']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args: ['gcloud', 'run', 'deploy', 'wip-deep-learning-server-v2', '--image', 'gcr.io/what-is-pill/wip-deep-learning-server-v2', '--region', 'asia-northeast1']
 
 options:
   logging: CLOUD_LOGGING_ONLY

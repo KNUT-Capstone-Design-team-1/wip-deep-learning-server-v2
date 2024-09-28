@@ -1,0 +1,8 @@
+steps:
+  - name: ubuntu
+    args:
+      - >-
+        docker build --no-cache . -t wip-deep-learning-server-v2 --build-arg
+        DL_SERVER_PORT=16262
+options:
+  logging: CLOUD_LOGGING_ONLY
